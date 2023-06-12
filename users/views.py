@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from rest_framework.views import APIView, Request, Response
 
-# Create your views here.
+
+class UserView(APIView):
+    ...
