@@ -21,7 +21,7 @@ class UserSerializer(serializers.Serializer):
     is_employee = serializers.BooleanField(required=False, default=False)
     is_superuser = serializers.BooleanField(read_only=True)
 
-    def create(self, validated_data):
+    def create(self, validated_data: dict) -> User:
         if validated_data["is_employee"] == True:
             user = User.objects.create_superuser(**validated_data)
             return user
