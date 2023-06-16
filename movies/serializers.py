@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Ratings
-from .models import Movie
+from .models import Movie, MovieOrder
+import ipdb
 
 
 class MovieSerializer(serializers.Serializer):
@@ -18,3 +19,18 @@ class MovieSerializer(serializers.Serializer):
         movie = Movie.objects.create(**validated_data)
         
         return movie
+
+
+class MovieOrderSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    title = serializers.CharField(max_length=127, source="ordered_movie.title", read_only=True)
+    buyed_at = serializers.DateField(read_only=True)
+    price = serializers.DecimalField(max_digits=8, decimal_places=2)
+    buyed_by = serializers.EmailField(
+        source="client.email",
+        read_only=True
+    )
+
+    def create(self, validated_data: dict) -> MovieOrder:
+        movie_order = MovieOrder.objects.create(**validated_data)
+        return movie_order
