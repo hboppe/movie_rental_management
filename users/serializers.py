@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
+from django.contrib.auth.password_validation import validate_password
 
 
 class UserSerializer(serializers.Serializer):
@@ -27,3 +28,18 @@ class UserSerializer(serializers.Serializer):
             return user
         
         return User.objects.create_user(**validated_data)
+
+    def update(self, instance: User, validated_data: dict) -> User:
+        for key, value in validated_data.items():
+
+            if(key == "password"):
+                # print(instance.set_password(value))
+                # validate_password(value, instance)
+                instance.set_password(value)
+
+            else: 
+                setattr(instance, key, value)
+            # setattr(instance, key, value)
+        instance.save()
+
+        return instance
