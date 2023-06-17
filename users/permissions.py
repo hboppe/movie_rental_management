@@ -8,5 +8,17 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 
         return (
             request.method in permissions.SAFE_METHODS
+             
+            or request.user.is_superuser
+        )
+    
+
+class IsAdminOrAccountOwner(permissions.BasePermission):
+
+    def has_object_permission(self, request: Request, view: View, obj: object) -> bool:
+
+        return (
+            request.user.is_authenticated
+            and obj == request.user
             or request.user.is_superuser
         )
