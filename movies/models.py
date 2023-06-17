@@ -31,6 +31,9 @@ class Movie(models.Model):
         related_name="ordered_movies_by_user"
     )
 
+    class Meta:
+        ordering = ["id"]
+
 
 class MovieOrder(models.Model):
     buyed_at = models.DateTimeField(auto_now_add=True)
