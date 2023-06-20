@@ -1,77 +1,9 @@
-# M5 - Kenzie Buster
+#Django Movie Rental Management API
 
-## Instalação dos pacotes de teste
+I've developed a Movie Rental Management API that enables the creation of movies and keeps track of which users have rented them.
 
-- Verifique se os pacotes `pytest` e/ou `pytest-testdox` estão instalados globalmente em seu sistema:
-```shell
-pip list
-```
-- Caso seja listado o `pytest` e/ou `pytest-testdox` e/ou `pytest-django` em seu ambiente global, utilize os seguintes comando para desinstalá-los globalmente:
-```shell
-pip uninstall pytest
-```
+With this API, users can sign up, log in, and update their details. The API also ensures that administrators have the permission to update and retrieve information of any user within the system.
 
-```shell
-pip uninstall pytest-testdox
-```
+Authentication is provided by the simplejwt library from Django REST framework, while authorization is handled by custom permissions, utilizing classes inherited from Django REST framework.
 
-```shell
-pip uninstall pytest-django
-```
-
-A partir disso, prossiga com os passos:
-
-1. Crie seu ambiente virtual:
-```bash
-python -m venv venv
-```
-
-2. Ative seu venv:
-```bash
-# linux:
-source venv/bin/activate
-
-# windows:
-.\venv\Scripts\activate
-
-# git bash:
-source venv/Scripts/activate
-```
-
-3. Instale o pacote `pytest-testdox`:
-```shell
-pip install pytest-testdox pytest-django
-```
-
-5. Vá até o arquivo `pytest.ini` e modifique o nome do projeto `my_project_name.settings` para o nome do **seu_projeto**.settings (onde se encontra o settings.py)
-
-4. Agora é só rodar os testes no diretório principal do projeto:
-```shell
-pytest --testdox -vvs
-```
-
-
-
-## Rodando os testes de cada tarefa isoladamente
-
-Ao fim de cada tarefa será possível executar uma suite de testes direcionada àquela tarefa específica. Lembre-se de sempre estar com o **virtual enviroment (venv) ativado**.
-
-- Rodando testes da Tarefa 1:
-```python
-pytest --testdox -vvs tests/tarefas/t1/
-```
-
-- Rodando testes da Tarefa 2:
-```python
-pytest --testdox -vvs tests/tarefas/t2/
-```
-
-- Rodando testes da Tarefa 3:
-```python
-pytest --testdox -vvs tests/tarefas/t3/
-```
-
-- Rodando testes da Tarefa 4:
-```python
-pytest --testdox -vvs tests/tarefas/t4/
-```
+Each user can rent multiple movies, and this many-to-many relationship is facilitated by a custom pivot model that includes information about the movie, the user, and the rental order itself.
