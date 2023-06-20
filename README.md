@@ -1,4 +1,4 @@
-#Django Movie Rental Management API
+# Django Movie Rental Management API
 
 I've developed a Movie Rental Management API that enables the creation of movies and keeps track of which users have rented them.
 
