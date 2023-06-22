@@ -33,13 +33,10 @@ class UserSerializer(serializers.Serializer):
         for key, value in validated_data.items():
 
             if(key == "password"):
-                # print(instance.set_password(value))
-                # validate_password(value, instance)
                 instance.set_password(value)
 
             else: 
                 setattr(instance, key, value)
-            # setattr(instance, key, value)
         instance.save()
 
         return instance
